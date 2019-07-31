@@ -42,20 +42,29 @@ public class _02_FindTheHiddenButton implements ActionListener{
 		//4. Initialize the array of JButtons to be the size of the int created in step 3
 		buttons = new JButton[input];
 		
+		//13. initialize the hiddenButton variable to a random number less than the int created int step 3
+		hiddenButton = random.nextInt(input);
+		
+		//14. Set the text of the JButton located at hiddenButton to  "ME"
+		
 		//5. Make a for loop to iterate through the JButton array
-		for (JButton button : buttons) {
+		for (int i = 0; i < buttons.length; i++) {
+			if (i == hiddenButton) {
+				buttons[i] = new JButton("ME");
+			} else {
+			
 			//6. initialize each JButton in the array
-			button = new JButton();
+			buttons[i] = new JButton();
+			}
 			
 			//7. add the ActionListener to each JButton
-			button.addActionListener(this);
+			buttons[i].addActionListener(this);
 			
 			//8. add each JButton to the panel
-			panel.add(button);
+			panel.add(buttons[i]);
 		}
 		
 		//9 add the panel to the window
-		
 		window.add(panel);
 		
 		//10. call setExtendedState(JFrame.MAXIMIZED_BOTH) on your JFrame object.
@@ -67,11 +76,6 @@ public class _02_FindTheHiddenButton implements ActionListener{
 		//12. Give the user the instructions for the game.
 		JOptionPane.showMessageDialog(window, "Find the hidden button");
 		
-		//13. initialize the hiddenButton variable to a random number less than the int created int step 3
-		hiddenButton = random.nextInt(input - 1);
-		
-		//14. Set the text of the JButton located at hiddenButton to  "ME"
-		buttons[hiddenButton].setText("ME");
 
 		//15. Use Thread.sleep(1000); to pause the program.
 		//    Surround it with a try/catch - use Eclipse helper for this
@@ -84,12 +88,10 @@ public class _02_FindTheHiddenButton implements ActionListener{
 		
 		//16. Set the text of the JButton located at hiddenButton to be blank.
 		buttons[hiddenButton].setText("");
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton buttonClicked = (JButton)e.getSource();
 		
 		//17. if the hiddenButton is clicked, tell the user that they win.
 		if (e.getSource() == buttons[hiddenButton]) {
